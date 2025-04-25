@@ -1,0 +1,78 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 100%; // 確保撐滿父層（如 menuItem）
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #333;
+  line-height: 1;
+
+  &.dark {
+    color: #eee;
+  }
+}
+
+.switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 60px;
+  height: 30px;
+
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  padding: 2px;
+  margin: 0;
+  box-sizing: border-box;
+  outline: none;
+
+  &:hover .thumb {
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  }
+
+  .icons {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 8px;
+    font-size: 0.8rem;
+    color: #555;
+    pointer-events: none;
+  }
+
+  .thumb {
+    width: 26px;
+    height: 26px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    transform: translateX(0);
+    position: absolute;
+    left: 2px;
+  }
+
+  &.dark {
+    background-color: #444;
+
+    .icons {
+      color: #ddd;
+    }
+
+    .thumb {
+      transform: translateX(30px);
+      background-color: #fff;
+    }
+  }
+}
