@@ -4,13 +4,19 @@ import { FiMoreVertical } from 'react-icons/fi';
 import { FiChevronUp, FiChevronDown } from 'react-icons/fi';
 import ThemeSwitch from './ThemeSwitch';
 
+{/* <JsonToTable data={someData} />              // 🔕 不會顯示 opt 功能
+<JsonToTable data={someData} opt />          // ✅ 顯示 opt 功能
+<JsonToTable data={someData} opt={true} />   // ✅ 同上
+<JsonToTable data={someData} opt={false} />  // 🔕 不會顯示 opt 功能 */}
+
 interface JsonToTableProps {
   data: Record<string, any>[];
+  opt?: boolean;
 }
 
 type SortOrder = 'asc' | 'desc' | null;
 
-const JsonToTable: React.FC<JsonToTableProps> = ({ data }) => {
+const JsonToTable: React.FC<JsonToTableProps> = ({ data, opt }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [sortBy, setSortBy] = useState<string | null>(null);
@@ -46,9 +52,10 @@ const JsonToTable: React.FC<JsonToTableProps> = ({ data }) => {
       <table className={styles.table}>
         <thead>
           <tr>
-            <th className={styles.actionCol}>
-              <button
-                onClick={() => setShowMenu(!showMenu)}
+            {opt && (
+              <th className={styles.actionCol}>
+                <button
+                  onClick={() => setShowMenu(!showMenu)}
                 className={styles.menuButton}
               >
                 <FiMoreVertical />
@@ -65,6 +72,7 @@ const JsonToTable: React.FC<JsonToTableProps> = ({ data }) => {
                 </ul>
               )}
             </th>
+            )}
             <th className={styles.indexCol}>#</th>
             {headers.map((header) => (
               <th key={header} onClick={() => handleSort(header)} style={{ cursor: 'pointer' }}>
